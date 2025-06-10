@@ -1,8 +1,7 @@
 import { Group, Stack, Text } from "@mantine/core"
 import BlockTitle from "../App/BlockTitle"
 import ContentBlock from "../App/ContentBlock"
-import { FaRegUser, FaUser } from "react-icons/fa6"
-import { TiUserOutline } from "react-icons/ti"
+import { FaRegUser } from "react-icons/fa6"
 import { useContext, useEffect, useState } from "react"
 import { RealTimeDataContext } from "./RealTimePage"
 import TasksGanttSection from "../App/Gantt"
@@ -169,7 +168,7 @@ const StreamBlock = () => {
                     </Stack>
                 </Stack>
                 <Stack gap={10} align="center">
-                    <TasksGanttSection tasks={data?.profile.tasks || []} onTaskClick={(task) => { }} />
+                    <TasksGanttSection tasks={data?.profile.tasks || []} onTaskClick={() => { }} />
                     <StackedBar />
                 </Stack>
 

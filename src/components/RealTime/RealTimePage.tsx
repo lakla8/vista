@@ -1,10 +1,7 @@
-import { Grid, GridCol, Group, Stack } from "@mantine/core";
-import BlockTitle from "../App/BlockTitle";
-import StatBlock from "../App/StatBlock";
+import { Grid } from "@mantine/core";
 import AnalyticsBlock from "./AnalyticsBlock";
 import StreamBlock from "./StreamBlock";
 import BondsBlock from "./BondsBlock";
-import FiltersBlock from "./Filters";
 import EarlyWarningBlock from "./EarlyWarningBlock";
 import { createContext, useEffect, useState } from "react";
 import { REAL_TIME_DATA } from "../../backend_constants/real_time";

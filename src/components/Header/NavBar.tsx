@@ -1,8 +1,7 @@
-import { Button, Image, useMantineTheme } from "@mantine/core";
+import { Button, Image } from "@mantine/core";
 import ContentBlock from "../App/ContentBlock";
 
 const NavBar = () => {
-    const theme = useMantineTheme();
     return (
         <ContentBlock w='100%' bg='green' mah={80} direction="row" align="center" justify="space-between" style={{borderTopLeftRadius: 0, borderTopRightRadius: 0}}>
             <Image src='/VISTA.svg' h='30px' fit='contain' w='auto' />

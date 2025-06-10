@@ -3,23 +3,6 @@
 // КОМПОНЕНТ ВЗАИМОСВЯЗИ КОМПОНЕНТОВ
 // ===========================================
 const ComponentRelationsSection = ({ data, animated }: any) => {
-    const getCategoryColor = (category: string) => {
-        switch (category) {
-            case "Состояние системы ЧФ": return '#4a7c59';
-            case "Персонал": return '#8e24aa';
-            default: return '#757575';
-        }
-    };
-
-    const getRiskSize = (risk: string) => {
-        switch (risk) {
-            case 'низкий': return 6;
-            case 'средний': return 10;
-            case 'высокий': return 14;
-            case 'критический': return 18;
-            default: return 8;
-        }
-    };
 
     return (
         <div className="component-relations">

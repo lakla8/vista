@@ -5,11 +5,7 @@ import { Image } from "@mantine/core";
 import { useEffect } from "react";
 
 // ===========================================
-const FlowDiagram = ({ items, onItemClick }: any) => {
-    const positions = [
-        'top-right', 'center-right', 'center',
-        'center-left', 'bottom-left', 'bottom'
-    ];
+const FlowDiagram = () => {
 
     useEffect(() => {
         // Создание SVG связей

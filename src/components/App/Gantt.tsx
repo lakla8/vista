@@ -16,17 +16,6 @@ export interface GanttTask {
   level: number          // Уровень вложенности (для сортировки при необходимости)
 }
 
-// Позиционирование бара
-interface Position {
-  left: number    // Отступ слева в процентах
-  width: number   // Ширина бара в процентах
-}
-
-// Строка таблицы или диаграммы
-type Row =
-  | { id: string; type: 'header'; name: string }
-  | (GanttTask & { type: 'task'; position: Position })
-
 interface TasksGanttSectionProps {
   tasks: GanttTask[]
   onTaskClick: (task: GanttTask) => void
@@ -79,7 +68,7 @@ const TasksGanttSection: React.FC<TasksGanttSectionProps> = ({ tasks, onTaskClic
   }
 
   // 3. Собираем массив строк с подсчетом позиций
-  const allRows: Row[] = []
+  const allRows: any[] = []
   Object.entries(tasksByGroup).forEach(([groupName, groupTasks]) => {
     // Заголовок группы
     allRows.push({ id: `group-${groupName}`, type: 'header', name: groupName })

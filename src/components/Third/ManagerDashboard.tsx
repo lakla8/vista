@@ -23,8 +23,7 @@ TODO ДЛЯ BACKEND ИНТЕГРАЦИИ:
 ==========================================
 */
 
-import React, { useState, useEffect, useRef, createContext } from 'react';
-import { Table, Badge, Box, Text, Group } from '@mantine/core';
+import { useState, useEffect, useRef, createContext } from 'react';
 import './ManagerDashboard.css';
 import Modal from '../Fourth/Modal';
 import TasksGanttSection, { type GanttTask } from '../App/Gantt';
@@ -48,9 +47,9 @@ const ManagerDashboard = () => {
     // STATE УПРАВЛЕНИЕ
     // ===========================================
     const [showModal, setShowModal] = useState(false);
-    const [modalContent, setModalContent] = useState({});
+    const [modalContent, setModalContent] = useState<any>({});
     const [selectedFactor, setSelectedFactor] = useState('Культура команды');
-    const [aiPosition, setAiPosition] = useState({ bottom: '20px', left: '20px' });
+    const [aiPosition, setAiPosition] = useState({ bottom: '20px', top: 'auto', left: '20px' });
     const [aiExpanded, setAiExpanded] = useState(false);
     const [tooltip, setTooltip] = useState({ show: false, content: '', x: 0, y: 0 });
     const [chartAnimated, setChartAnimated] = useState(false);
@@ -68,14 +67,14 @@ const ManagerDashboard = () => {
     
     
     // Refs для DOM элементов
-    const aiAssistantRef = useRef(null);
+    const aiAssistantRef: any = useRef(null);
     const isDragging = useRef(false);
     const dragStart = useRef({ x: 0, y: 0, left: 0, top: 0 });
 
     // ===========================================
     // MOCK DATA (TODO: Заменить на API)
     // ===========================================
-    const [managerData, setManagerData] = useState({
+    const [managerData, _] = useState({
         user: {
             name: "Иванов Иван Иванович",
             role: "Руководитель"
@@ -174,7 +173,7 @@ const ManagerDashboard = () => {
         setShowModal(true);
     };
 
-    const handleChartBarClick = (month: any, index: any) => {
+    const handleChartBarClick = (_: any, index: any) => {
         const months = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
         setModalContent({
             title: `Детали за ${months[index]}`,
@@ -195,7 +194,7 @@ const ManagerDashboard = () => {
         setSelectedFactor(factor);
         
         // Анимация нажатия
-        const button = document.querySelector(`[data-factor="${factor}"]`);
+        const button: any = document.querySelector(`[data-factor="${factor}"]`);
         if (button) {
             button.style.transform = 'scale(0.95)';
             setTimeout(() => {

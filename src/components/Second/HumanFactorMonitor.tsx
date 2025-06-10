@@ -13,7 +13,7 @@ HUMAN FACTOR MONITOR - REACT COMPONENT
 ==========================================
 */
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import AnalyticsSection from './AnalyticsSection';
 import ComponentRelationsSection from './ComponentRelationsSection';
 import RedLineChartSection from './RedLineChartSection';
@@ -46,7 +46,7 @@ const HumanFactorMonitor = () => {
     // ===========================================
     // MOCK DATA
     // ===========================================
-    const [humanFactorData, setHumanFactorData] = useState({
+    const [humanFactorData, _] = useState({
         user: {
             name: "Иванов Иван Иванович",
             role: "Руководитель"
@@ -161,28 +161,7 @@ const HumanFactorMonitor = () => {
         setModalContent({});
     };
 
-    // ===========================================
-    // ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
-    // ===========================================
-    const getRiskColor = (risk: string) => {
-        switch (risk) {
-            case 'низкий': return '#4a7c59';
-            case 'средний': return '#ffa726';
-            case 'высокий': return '#ef5350';
-            case 'критический': return '#d32f2f';
-            default: return '#757575';
-        }
-    };
 
-    const getMatrixCellColor = (value: number, risk: string) => {
-        if (typeof value === 'number') {
-            if (value >= 7) return '#4a7c59'; // зеленый
-            if (value >= 4) return '#ffa726'; // оранжевый
-            if (value >= 2) return '#ef5350'; // красный
-            return '#d32f2f'; // темно-красный
-        }
-        return getRiskColor(risk);
-    };
 
     // ===========================================
     // РЕНДЕР КОМПОНЕНТА
@@ -287,15 +266,5 @@ const HumanFactorMonitor = () => {
     );
 };
 
-
-const getRiskColor = (risk: string) => {
-    switch (risk) {
-        case 'низкий': return '#4a7c59';
-        case 'средний': return '#ffa726';
-        case 'высокий': return '#ef5350';
-        case 'критический': return '#d32f2f';
-        default: return '#757575';
-    }
-};
 
 export default HumanFactorMonitor; 

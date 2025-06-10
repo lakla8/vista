@@ -1,7 +1,6 @@
 import { Group, Stack, Switch, Text, TextInput } from "@mantine/core"
 import ContentBlock from "../App/ContentBlock"
 import { useState } from "react";
-import { FaSearch } from "react-icons/fa";
 
 const filtersData = [
     "Подразделение",

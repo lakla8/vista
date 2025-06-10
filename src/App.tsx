@@ -1,4 +1,4 @@
-import { createTheme, Flex, MantineProvider, type MantineTheme } from "@mantine/core"
+import { createTheme, Flex, MantineProvider } from "@mantine/core"
 import Header from "./components/Header/Header"
 import '@mantine/core/styles.css';
 import RealTimePage from "./components/RealTime/RealTimePage";

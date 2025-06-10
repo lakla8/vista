@@ -22,7 +22,7 @@ const RedLineChartSection = ({ data, animated, threshold }: any) => {
                     <line x1="40" y1="280" x2="40" y2="20" stroke="#333" strokeWidth="2"/>
                     
                     {/* Горизонтальные линии сетки */}
-                    {[0, 10, 20, 30, 40].map((value, index) => {
+                    {[0, 10, 20, 30, 40].map((value) => {
                         const y = 280 - (value * 8);
                         return (
                             <g key={value}>

@@ -1,10 +1,4 @@
 
-// ===========================================
-// КОМПОНЕНТ ФАКТОРОВ
-
-import { Grid } from "@mantine/core";
-
-// ===========================================
 const FactorsSection = ({ selectedFactor, onFactorClick }: any) => {
     const factors = [
         'Команда', 'Soft/Hardware - логи', 'Техника - логи', 'Руководство',

@@ -21,10 +21,9 @@ TODO ДЛЯ BACKEND ИНТЕГРАЦИИ:
 ==========================================
 */
 
-import React, { useState, useEffect, useRef, createContext, useContext } from 'react';
+import { useState, useEffect, useRef, createContext } from 'react';
 import './EmployeeDashboard.css';
 import { DEPARTMENT_ANALYTICS_DATA } from '../../backend_constants/department_analytics';
-import Gantt from '../RealTime/charts/Gantt';
 import Modal from './Modal';
 import FactorsSection from '../Fourth/FactorsSection';
 import AIAssistant from './AIAssistant';
@@ -62,9 +61,9 @@ const EmployeeDashboard = () => {
     // STATE УПРАВЛЕНИЕ
     // ===========================================
     const [showModal, setShowModal] = useState(false);
-    const [modalContent, setModalContent] = useState({});
+    const [modalContent, setModalContent] = useState<any>({});
     const [selectedFactor, setSelectedFactor] = useState(null);
-    const [aiPosition, setAiPosition] = useState({ bottom: '20px', left: '20px' });
+    const [aiPosition, setAiPosition] = useState({ bottom: '20px', top: 'auto', left: '20px' });
 
     const [data, setData] = useState<DepartmentAnalyticsDataContextType | undefined>(undefined);
 
@@ -85,7 +84,7 @@ const EmployeeDashboard = () => {
     // ===========================================
     // MOCK DATA (TODO: Заменить на API)
     // ===========================================
-    const [employeeData, setEmployeeData] = useState({
+    const [employeeData, _] = useState({
         user: {
             name: "Иванов Иван Иванович",
             role: "Руководитель"
@@ -198,71 +197,6 @@ const EmployeeDashboard = () => {
     const closeModal = () => {
         setShowModal(false);
         console.log('Модальное окно закрыто');
-    };
-
-    // Обработка клика по задаче
-    const handleTaskClick = (task: { status: 'completed' | 'in_progress' | 'waiting', id: number, name: string, description: string, color: string, progress: number }) => {
-        console.log(`Клик по задаче: ${task.name}`);
-
-        // TODO: Заменить на API вызов
-        /*
-        fetch(`/api/employee/123/tasks/${task.id}`)
-            .then(response => response.json())
-            .then(taskDetails => {
-                const content = generateTaskContent(taskDetails);
-                openModal(task.name, content);
-            });
-        */
-
-        const statusText = {
-            completed: 'Выполнена',
-            in_progress: 'В процессе',
-            waiting: 'Ожидает'
-        };
-
-        const content = (
-            <div className="modal-task-content">
-                <p><strong>Описание:</strong> {task.description}</p>
-                <p><strong>Статус:</strong> <span style={{ color: task.color }}>{statusText[task.status]}</span></p>
-                <p><strong>Прогресс:</strong> {task.progress}%</p>
-                <div className="progress-bar">
-                    <div
-                        className="progress-fill"
-                        style={{
-                            width: `${task.progress}%`,
-                            backgroundColor: task.color
-                        }}
-                    ></div>
-                </div>
-            </div>
-        );
-
-        openModal(task.name, content);
-    };
-
-    // Обработка клика по flow элементу
-    const handleFlowClick = (flowItem: any) => {
-        console.log(`Клик по flow элементу: ${flowItem.name}`);
-
-        // TODO: Заменить на API вызов
-        /*
-        fetch(`/api/employee/123/flow/${flowItem.id}`)
-            .then(response => response.json())
-            .then(data => {
-                const content = generateFlowContent(data);
-                openModal(flowItem.name, content, 'fa-project-diagram');
-            });
-        */
-
-        const content = (
-            <div className="modal-flow-content">
-                <p>Этапы развития:</p>
-                <p><strong>Активные проекты:</strong> {Math.floor(Math.random() * 10) + 1}</p>
-                <p><strong>Завершенность:</strong> {Math.floor(Math.random() * 40) + 60}%</p>
-            </div>
-        );
-
-        openModal(flowItem.name, content, 'fa-project-diagram');
     };
 
     // Strategic CoPilot
@@ -396,7 +330,7 @@ const EmployeeDashboard = () => {
         // Анимация чисел в метриках
         setTimeout(() => {
             const metricElements = document.querySelectorAll('.item span:last-child');
-            metricElements.forEach((el: any, i: any) => {
+            metricElements.forEach((el: any) => {
                 const value = parseInt(el.textContent);
                 let current = 0;
                 const increment = value / 30;
@@ -457,11 +391,11 @@ const EmployeeDashboard = () => {
                     <h2>Аналитика по направлениям и подразделениям</h2>
                 </header> */}
 
-                    <div className="main-content" style={{gridTemplateColumns: '1.5fr 1fr 1.2fr', minHeight: '0px', height: 'fit-content'}}>
+                    <div className="main-content" style={{ gridTemplateColumns: '1.5fr 1fr 1.2fr', minHeight: '0px', height: 'fit-content' }}>
                         {/* ЛЕВАЯ ПАНЕЛЬ */}
-                        <div className="left-panel" style={{gridRow: '1'}}>
+                        <div className="left-panel" style={{ gridRow: '1' }}>
                             {/* GANTT ДИАГРАММА */}
-                            <TasksGanttSection tasks={data?.tasks_timeline || []} onTaskClick={(task) => { }} />
+                            <TasksGanttSection tasks={data?.tasks_timeline || []} onTaskClick={() => { }} />
 
                             {/* ПРОФИЛЬ */}
                             <ProfileSection />
@@ -491,10 +425,7 @@ const EmployeeDashboard = () => {
                         {/* ПРАВАЯ ПАНЕЛЬ */}
                         <div className="right-panel">
                             <h3>РЕАЛИЗАЦИЯ ПРОЕКТОВ</h3>
-                            <FlowDiagram
-                                items={employeeData.flowItems}
-                                onItemClick={handleFlowClick}
-                            />
+                            <FlowDiagram />
                         </div>
 
                         {/* НИЖНЯЯ СЕКЦИЯ */}

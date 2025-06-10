@@ -580,11 +580,6 @@ body {
     text-align: center;
 }
 
-.level-status,
-.level-percent,
-.level-gantt {
-    /* пустые колонки для выравнивания */
-}
 
 .task-grid-row {
     display: grid;
@@ -658,10 +653,6 @@ body {
     grid-template-columns: 340px 1fr;
     /* Оставляем место для таблицы (150+120+60+10) */
     gap: 10px;
-}
-
-.timeline-spacer {
-    /* пустое место */
 }
 
 .timeline-red-line {
@@ -746,10 +737,6 @@ body {
     border-radius: 6px;
     padding: 8px;
     margin-top: 8px;
-}
-
-.team-performance {
-    /* возвращаем к простой структуре */
 }
 
 .legend {

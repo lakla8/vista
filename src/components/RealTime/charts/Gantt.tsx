@@ -2,7 +2,6 @@ import { Stack } from "@mantine/core";
 import React, { useContext, useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 import StackedBar from "./StackedBar";
-import { RealTimeDataContext } from "../RealTimePage";
 
 const columns = [
     { type: "string", label: "Task ID" },
@@ -45,18 +44,6 @@ const options = {
     },
 };
 
-type GanttTask = {
-    id: number,
-    name: string,
-    description: string,
-    status: "completed" | "in_progress" | "waiting",
-    progress: number,
-    position: {
-        left: number,
-        width: number,
-    },
-    color: string,
-}
 
 const Gantt: React.FC<{ context: any, keys: any, withStackedBar?: boolean }> = ({ context, keys, withStackedBar }: any) => {
     const data = useContext<any>(context);

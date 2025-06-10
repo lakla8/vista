@@ -2,7 +2,7 @@
 // ===========================================
 // КОМПОНЕНТ МАТРИЦЫ ПРАВОЙ ПАНЕЛИ (ОБНОВЛЕННЫЙ С MANTINE)
 // ===========================================
-const RightPanelMatrixSection = ({ matrix, onMatrixClick }: any) => {
+const RightPanelMatrixSection = ({ onMatrixClick }: any) => {
     const categories = [
         { name: "ПЕРСОНАЛ", color: "#ffd93d" },
         { name: "КОМАНДЫ", color: "#ff6b35" }, 
