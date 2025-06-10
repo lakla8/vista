@@ -2,24 +2,24 @@
     "type": "force",
     "categories": [
         {
-            "name": "HTMLElement",
+            "name": "Name1",
             "keyword": {},
-            "base": "HTMLElement"
+            "base": "Name1"
         },
         {
-            "name": "WebGL",
+            "name": "Name2",
             "keyword": {},
-            "base": "WebGLRenderingContext"
+            "base": "Name2"
         },
         {
-            "name": "SVG",
+            "name": "Name3",
             "keyword": {},
-            "base": "SVGElement"
+            "base": "Name3"
         },
         {
-            "name": "CSS",
+            "name": "Name4",
             "keyword": {},
-            "base": "CSSRule"
+            "base": "Name4"
         },
         {
             "name": "Other",

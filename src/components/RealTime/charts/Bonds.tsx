@@ -1,5 +1,6 @@
 import ReactEChart from "echarts-for-react";
 import { useEffect, useState } from "react";
+import ContentBlock from "../../App/ContentBlock";
 
 const Bonds = () => {
 
@@ -11,7 +12,7 @@ const Bonds = () => {
             .then(webkitDep => {
                 setOption({
                     legend: {
-                        data: ['HTMLElement', 'WebGL', 'SVG', 'CSS', 'Other']
+                        data: []
                     },
                     series: [
                         {
@@ -23,7 +24,7 @@ const Bonds = () => {
                                 formatter: '{b}'
                             },
                             draggable: true,
-                            data: webkitDep.nodes.map((node, idx) => {
+                            data: webkitDep.nodes.map((node: any, idx: any) => {
                                 node.id = idx;
                                 return node;
                             }),
@@ -41,7 +42,11 @@ const Bonds = () => {
     }, [])
 
     return (
-        <ReactEChart option={option} />
+        <ContentBlock h={'100%'} p={0}>
+            <div style={{ width: '100%', height: '100%', overflow: 'visible' }}>
+                <ReactEChart option={option} />
+            </div>
+        </ContentBlock>
     )
 }
 

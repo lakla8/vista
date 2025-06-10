@@ -5,8 +5,8 @@ export type BlockTitleProps = TitleProps
 
 const BlockTitle = (props: BlockTitleProps) => {
     return (
-        <ContentBlock justify={'center'} align={'center'} bg='#8DB881'>
-            <Title fz={18} order={2} {...props}/>
+        <ContentBlock justify={'center'} align={'center'} bg='#4a7c59'>
+            <Title c='white' style={{textAlign: 'center'}} fz={18} order={2} {...props}/>
         </ContentBlock>
     )
 }
