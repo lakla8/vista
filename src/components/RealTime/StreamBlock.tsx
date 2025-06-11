@@ -141,7 +141,7 @@ const StreamBlock = () => {
             </Group>
         </ContentBlock>
 
-        <ContentBlock w='100%' h='100%'>
+        <ContentBlock w='100%' h='100%' justify={'space-between'}>
             <Group wrap="nowrap" align="start" w='100%' gap={20}>
                 <Stack gap={10} align="center">
                     <Text fz={32} lh={1} c='#8C0436' fw='600'>ПРОФАЙЛ</Text>
@@ -169,7 +169,6 @@ const StreamBlock = () => {
                 </Stack>
                 <Stack gap={10} align="center">
                     <TasksGanttSection tasks={data?.profile.tasks || []} onTaskClick={() => { }} />
-                    <StackedBar />
                 </Stack>
 
                 <Stack gap={10} align="center">
@@ -197,6 +196,8 @@ const StreamBlock = () => {
                     </Stack>
                 </Stack>
             </Group>
+            
+                    <StackedBar />
         </ContentBlock>
 
     </Stack>)

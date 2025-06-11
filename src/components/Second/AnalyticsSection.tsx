@@ -4,7 +4,7 @@
 // ===========================================
 const AnalyticsSection = ({ analytics, riskIdentification, riskResponse, onRiskClick }: any) => {
     return (
-        <div className="analytics-section">
+        <div className="analytics-section" style={{gridRow: '1 / span 2'}}>
             
             {/* Основные показатели */}
             <div className="main-metrics">

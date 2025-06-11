@@ -6,7 +6,7 @@ const RedLineChartSection = ({ data, animated, threshold }: any) => {
     const months = ['Сент', 'Окт', 'Нояб', 'Дек', 'Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг'];
     if (!data) return null;
     return (
-        <div className="red-line-chart">
+        <div className="red-line-chart" style={{gridColumn: '2', gridRow: '3'}}>
             <div className="chart-container" style={{ background: 'white', marginTop: '-20px' }}>
                 <svg width="100%" height="300" viewBox="0 0 700 300">
                     {/* Сетка */}

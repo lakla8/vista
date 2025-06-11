@@ -23,6 +23,28 @@ export const REAL_TIME_DATA = {
       ]
     },
     {
+      "employee_id": "363893",
+      "date": "2025-06-06",
+      "start_time": "10:05:12",
+      "breaks": {
+        "long": 2,
+        "short": 2
+      },
+      "logs": [
+        {
+          "count": 2,
+          "description": "drop"
+        },
+        {
+          "count": 3,
+          "description": "drop"
+        }
+      ],
+      "additional_info": [
+        "Extra attention"
+      ]
+    },
+    {
       "employee_id": "785156",
       "date": "2025-06-07",
       "start_time": "10:36:08",

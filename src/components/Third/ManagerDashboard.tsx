@@ -35,6 +35,8 @@ import MeetingChartSection from './MeetingChartSection';
 import ProjectRealizationSection from './ProjectRealizationSection';
 import TeamPerformanceSection from './TeamPerformanceSection';
 import { HR_ANALYTICS_DATA } from '../../backend_constants/hr_analytics';
+import { FETCHES } from '../../App';
+import { Stack } from '@mantine/core';
 
 type HrAnalyticsDataType = typeof HR_ANALYTICS_DATA;
 const HrAnalyticsDataContext = createContext<HrAnalyticsDataType | undefined>(undefined);
@@ -56,16 +58,21 @@ const ManagerDashboard = () => {
 
 
     const [data, setData] = useState<HrAnalyticsDataType | undefined>(undefined);
-    
-        useEffect(() => {
-            window.scrollTo(0, 0);
-            // setData(HR_ANALYTICS_DATA as HrAnalyticsDataType);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        if (FETCHES) {
             fetch('/api/v1/hr_analytics', { method: 'GET' })
                 .then(response => response.json())
                 .then(data => setData(data));
-        }, [])
-    
-    
+        }
+        else {
+            setData(HR_ANALYTICS_DATA as HrAnalyticsDataType);
+        }
+
+    }, [])
+
+
     // Refs для DOM элементов
     const aiAssistantRef: any = useRef(null);
     const isDragging = useRef(false);
@@ -124,7 +131,7 @@ const ManagerDashboard = () => {
         ],
         factors: [
             "Культура команды",
-            "Soft/Hardware", 
+            "Soft/Hardware",
             "Техника, состояние",
             "Потенциал",
             "Проф. прогнозы",
@@ -158,9 +165,9 @@ const ManagerDashboard = () => {
                     <p><strong>Прогресс:</strong> {task.percent}%</p>
                     <p><strong>Описание:</strong> Детальная информация о задаче {task.name}</p>
                     <div className="progress-bar">
-                        <div 
-                            className="progress-fill" 
-                            style={{ 
+                        <div
+                            className="progress-fill"
+                            style={{
                                 width: `${task.percent}%`,
                                 backgroundColor: getStatusColor(task.status)
                             }}
@@ -192,7 +199,7 @@ const ManagerDashboard = () => {
 
     const handleFactorClick = (factor: any) => {
         setSelectedFactor(factor);
-        
+
         // Анимация нажатия
         const button: any = document.querySelector(`[data-factor="${factor}"]`);
         if (button) {
@@ -233,16 +240,16 @@ const ManagerDashboard = () => {
                 <div className="modal-metric-content">
                     <p><strong>Показатель:</strong> {metricType}</p>
                     <p><strong>Текущее значение:</strong> {value}</p>
-                    <p><strong>Статус:</strong> {metricType === 'KPI' && parseInt(value) > 100 ? 'Превышает план' : 
-                                              metricType === 'OKR' && parseInt(value) > 80 ? 'В пределах нормы' : 
-                                              metricType === 'Укомплектованность' && parseInt(value) > 90 ? 'Хорошо укомплектовано' : 
-                                              'Требует внимания'}</p>
+                    <p><strong>Статус:</strong> {metricType === 'KPI' && parseInt(value) > 100 ? 'Превышает план' :
+                        metricType === 'OKR' && parseInt(value) > 80 ? 'В пределах нормы' :
+                            metricType === 'Укомплектованность' && parseInt(value) > 90 ? 'Хорошо укомплектовано' :
+                                'Требует внимания'}</p>
                     <p><strong>Рекомендации:</strong> {
                         metricType === 'KPI' ? 'Поддерживать текущий уровень эффективности' :
-                        metricType === 'OKR' ? 'Работать над достижением ключевых результатов' :
-                        metricType === 'Укомплектованность' ? 'Планировать найм при необходимости' :
-                        metricType === 'Сотрудники' ? 'Оптимизировать распределение нагрузки' :
-                        'Контролировать расходы и планировать бюджет'
+                            metricType === 'OKR' ? 'Работать над достижением ключевых результатов' :
+                                metricType === 'Укомплектованность' ? 'Планировать найм при необходимости' :
+                                    metricType === 'Сотрудники' ? 'Оптимизировать распределение нагрузки' :
+                                        'Контролировать расходы и планировать бюджет'
                     }</p>
                 </div>
             ),
@@ -264,7 +271,7 @@ const ManagerDashboard = () => {
     // ===========================================
     const handleMouseDown = (e: any) => {
         if (!aiAssistantRef.current) return;
-        
+
         isDragging.current = true;
         const rect = aiAssistantRef.current.getBoundingClientRect();
         dragStart.current = {
@@ -273,7 +280,7 @@ const ManagerDashboard = () => {
             left: rect.left,
             top: rect.top
         };
-        
+
         document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', handleMouseUp);
         e.preventDefault();
@@ -281,13 +288,13 @@ const ManagerDashboard = () => {
 
     const handleMouseMove = (e: any) => {
         if (!isDragging.current) return;
-        
+
         const deltaX = e.clientX - dragStart.current.x;
         const deltaY = e.clientY - dragStart.current.y;
-        
+
         const newLeft = Math.max(0, Math.min(window.innerWidth - 350, dragStart.current.left + deltaX));
         const newTop = Math.max(0, Math.min(window.innerHeight - 200, dragStart.current.top + deltaY));
-        
+
         setAiPosition({
             left: `${newLeft}px`,
             top: `${newTop}px`,
@@ -307,10 +314,10 @@ const ManagerDashboard = () => {
     const handleSegmentHover = (personName: any, segmentType: any, value: any, event: any) => {
         const segmentTypeText: any = {
             productive: 'Продуктивное',
-            active: 'Активное', 
+            active: 'Активное',
             unproductive: 'Непродуктивное'
         };
-        
+
         setTooltip({
             show: true,
             content: `${personName}\n${segmentTypeText[segmentType]}: ${value}`,
@@ -338,7 +345,7 @@ const ManagerDashboard = () => {
 
     const handleBottomMetricClick = (metricLabel: any, value: any, color: any) => {
         const getMetricAnalysis = (label: any, val: any, colorType: any) => {
-            switch(label) {
+            switch (label) {
                 case 'Количество команд':
                     return {
                         status: parseInt(val) > 25 ? 'Высокая нагрузка на управление' : 'Нормальная нагрузка',
@@ -378,7 +385,7 @@ const ManagerDashboard = () => {
         };
 
         const analysis = getMetricAnalysis(metricLabel, value, color);
-        
+
         setModalContent({
             title: `Анализ: ${metricLabel}`,
             content: (
@@ -421,7 +428,7 @@ const ManagerDashboard = () => {
     // ===========================================
     return (
         <HrAnalyticsDataContext.Provider value={data}>
-        {/* <div className="manager-dashboard"> */}
+            {/* <div className="manager-dashboard"> */}
             {/* НАВИГАЦИОННАЯ ПАНЕЛЬ */}
             {/* <nav className="top-nav">
                 <div className="logo">*ЛОГОТИП*</div>
@@ -451,24 +458,24 @@ const ManagerDashboard = () => {
             </nav> */}
 
             {/* ОСНОВНОЙ КОНТЕНТ */}
-            <div className="dashboard" style={{width: '100%'}}>
+            <div className="dashboard" style={{ width: '100%' }}>
                 {/* <header className="header">
                     <h1>MANAGER'S MONITOR</h1>
                     <h2>Аналитика по направлениям и персоналу</h2>
                 </header> */}
 
-                <div className="main-content" style={{gridTemplateColumns: '1.4fr 0.8fr 1.2fr', minHeight: '0px', height: 'fit-content'}}>
+                <div className="main-content" style={{ gridTemplateColumns: '1.4fr 0.8fr 1.2fr', minHeight: '0px', height: 'fit-content' }}>
                     {/* ЛЕВАЯ ПАНЕЛЬ */}
-                    <div className="left-panel" style={{height: '100%', gridRow: '1'}}>
+                    <div className="left-panel" style={{ height: '100%', gridRow: '1' }}>
                         {/* ТАБЛИЦА ЗАДАЧ И GANTT ДИАГРАММА */}
-                        <TasksGanttSection 
+                        <TasksGanttSection
                             tasks={data?.tasks_timeline as GanttTask[] || []}
                             onTaskClick={handleTaskClick}
                         />
-                        
+
                         {/* ПРОИЗВОДИТЕЛЬНОСТЬ КОМАНДЫ */}
                         <div className="team-performance-container">
-                            <TeamPerformanceSection 
+                            <TeamPerformanceSection
                                 teamData={data?.employee_time_usage || []}
                                 onSegmentHover={handleSegmentHover}
                                 onSegmentLeave={handleSegmentLeave}
@@ -477,15 +484,15 @@ const ManagerDashboard = () => {
                     </div>
 
                     {/* ЦЕНТРАЛЬНАЯ ПАНЕЛЬ */}
-                    <div className="center-panel" style={{height: '100%'}}>
+                    <div className="center-panel" style={{ height: '100%' }}>
                         {/* МЕТРИКИ */}
-                        <DataSection 
-                            metrics={managerData.metrics} 
+                        <DataSection
+                            metrics={managerData.metrics}
                             onMetricClick={handleMetricClick}
                         />
-                        
+
                         {/* ГРАФИК ВСТРЕЧ */}
-                        <MeetingChartSection 
+                        <MeetingChartSection
                             chartData={data?.team_meetings || []}
                             onBarClick={handleChartBarClick}
                             animated={chartAnimated}
@@ -493,16 +500,19 @@ const ManagerDashboard = () => {
                     </div>
 
                     {/* ПРАВАЯ ПАНЕЛЬ */}
-                    <div className="right-panel" style={{height: '100%'}}>
-                        <h3>РЕАЛИЗАЦИЯ ПРОЕКТОВ</h3>
-                        <ProjectRealizationSection 
-                            projects={data?.project_realization || []}
-                            onProjectSegmentHover={handleProjectSegmentHover}
-                            onProjectSegmentLeave={handleProjectSegmentLeave}
-                        />
-                        
+                    <div className="right-panel" style={{ height: '100%', justifyContent: 'space-between' }}>
+                        <Stack gap={10}>
+                            <h3>РЕАЛИЗАЦИЯ ПРОЕКТОВ</h3>
+                            <ProjectRealizationSection
+                                projects={data?.project_realization || []}
+                                onProjectSegmentHover={handleProjectSegmentHover}
+                                onProjectSegmentLeave={handleProjectSegmentLeave}
+                            />
+                        </Stack>
+
+
                         {/* НИЖНИЕ МЕТРИКИ */}
-                        <BottomMetricsSection 
+                        <BottomMetricsSection
                             metrics={managerData.bottomMetrics}
                             onBottomMetricClick={handleBottomMetricClick}
                         />
@@ -510,7 +520,7 @@ const ManagerDashboard = () => {
                 </div>
 
                 {/* НИЖНЯЯ СЕКЦИЯ */}
-                <FactorAnalyticsSection 
+                <FactorAnalyticsSection
                     factors={managerData.factors}
                     selectedFactor={selectedFactor}
                     onFactorClick={handleFactorClick}
@@ -538,7 +548,7 @@ const ManagerDashboard = () => {
 
             {/* TOOLTIP */}
             {tooltip.show && (
-                <div 
+                <div
                     className="team-tooltip"
                     style={{
                         left: tooltip.x,
@@ -550,7 +560,7 @@ const ManagerDashboard = () => {
                     ))}
                 </div>
             )}
-        {/* </div> */}
+            {/* </div> */}
         </HrAnalyticsDataContext.Provider>
     );
 };

@@ -15,7 +15,7 @@ const TrendChartsSection = ({ trendData, animated }: any) => {
 
     const maxValue = 25;
     const chartWidth = 680;
-    const chartHeight = 380;
+    const chartHeight = 250;
     const marginLeft = 35;
     const marginRight = 20;
     const marginTop = 15;
@@ -36,7 +36,9 @@ const TrendChartsSection = ({ trendData, animated }: any) => {
                 flex: '1',
                 display: 'flex',
                 flexDirection: 'column',
-                minHeight: '0'
+                minHeight: '0',
+                gridRow: '3',
+                gridColumn: '3'
             }}>
                 {/* Легенда */}
                 <div style={{ 

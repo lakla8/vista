@@ -53,7 +53,7 @@ const FlowDiagram = () => {
         //         </div>
         //     ))}
         // </div>
-        <Image src='flow.svg' width={'100%'}/>
+        <Image src='flow.svg' height={'100%'}/>
     );
 };
 

@@ -11,6 +11,7 @@ import './components/Second/HumanFactorMonitor.css';
 import './components/Fourth/EmployeeDashboard.css';
 import './components/Third/ManagerDashboard.css';
 
+export const FETCHES = false;
 
 const theme = createTheme({
     defaultRadius: '10px',

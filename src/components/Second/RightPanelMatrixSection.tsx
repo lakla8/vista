@@ -34,7 +34,9 @@ const RightPanelMatrixSection = ({ onMatrixClick }: any) => {
             flex: '1',
             display: 'flex',
             flexDirection: 'column',
-            minHeight: '320px'
+            minHeight: '320px',
+            gridRow: '2',
+            gridColumn: '3'
         }}>
             
             <div style={{ 

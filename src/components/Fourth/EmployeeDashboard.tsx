@@ -33,6 +33,8 @@ import EffectivenessSection from './EffectivenessSection';
 import FlowDiagram from './FlowDiagram';
 import ProfileSection from './ProfileSection';
 import TasksGanttSection from '../App/Gantt';
+import { FETCHES } from '../../App';
+import { DEPARTMENT_ANALYTICS_DATA } from '../../backend_constants/department_analytics';
 
 type DepartmentAnalyticsDataContextType = {
     tasks_timeline: {
@@ -69,10 +71,14 @@ const EmployeeDashboard = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        // setData(DEPARTMENT_ANALYTICS_DATA as DepartmentAnalyticsDataContextType);
-        fetch('/api/v1/department_analytics', { method: 'GET' })
-            .then(response => response.json())
-            .then(data => setData(data));
+        if (FETCHES) {
+            fetch('/api/v1/department_analytics', { method: 'GET' })
+                .then(response => response.json())
+                .then(data => setData(data));
+        }
+        else {
+            setData(DEPARTMENT_ANALYTICS_DATA as DepartmentAnalyticsDataContextType);
+        }
     }, [])
 
 
@@ -391,9 +397,9 @@ const EmployeeDashboard = () => {
                     <h2>Аналитика по направлениям и подразделениям</h2>
                 </header> */}
 
-                    <div className="main-content" style={{ gridTemplateColumns: '1.5fr 1fr 1.2fr', minHeight: '0px', height: 'fit-content' }}>
+                    <div className="main-content" style={{ gridTemplateColumns: '1.5fr 1fr 1.2fr', gridTemplateRows: '700px auto', minHeight: '0px', height: 'fit-content' }}>
                         {/* ЛЕВАЯ ПАНЕЛЬ */}
-                        <div className="left-panel" style={{ gridRow: '1' }}>
+                        <div className="left-panel" style={{ gridRow: '1', justifyContent: 'space-between', height:'100%' }}>
                             {/* GANTT ДИАГРАММА */}
                             <TasksGanttSection tasks={data?.tasks_timeline || []} onTaskClick={() => { }} />
 
@@ -405,7 +411,7 @@ const EmployeeDashboard = () => {
                         </div>
 
                         {/* ЦЕНТРАЛЬНАЯ ПАНЕЛЬ */}
-                        <div className="center-panel">
+                        <div className="center-panel" style={{justifyContent: 'space-between', height:'100%'}}>
                             <h3>АНАЛИТИКА АКТИВНОСТИ</h3>
 
                             {/* МЕТРИКИ */}

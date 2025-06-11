@@ -20,8 +20,8 @@ import RedLineChartSection from './RedLineChartSection';
 import RightPanelMatrixSection from './RightPanelMatrixSection';
 import TrendChartsSection from './TrendChartsSection';
 import Modal from '../Fourth/Modal';
-import { Stack } from '@mantine/core';
 import { MATRIX_RISKS_DATA } from '../../backend_constants/matrix_risks';
+import { FETCHES } from '../../App';
 
 type MatrixRisksType = typeof MATRIX_RISKS_DATA
 
@@ -34,13 +34,17 @@ const HumanFactorMonitor = () => {
     const [animationTrigger, setAnimationTrigger] = useState(false);
 
     const [data, setData] = useState<MatrixRisksType | undefined>(undefined);
-    
+
     useEffect(() => {
         window.scrollTo(0, 0);
-        // setData(MATRIX_RISKS_DATA as MatrixRisksType);
-        fetch('/api/v1/matrix_risks', { method: 'GET' })
-            .then(response => response.json())
-            .then(data => setData(data));
+        if (FETCHES) {
+            fetch('/api/v1/matrix_risks', { method: 'GET' })
+                .then(response => response.json())
+                .then(data => setData(data));
+        }
+        else {
+            setData(MATRIX_RISKS_DATA as MatrixRisksType);
+        }
     }, [])
 
     // ===========================================
@@ -203,28 +207,30 @@ const HumanFactorMonitor = () => {
                     <h2>Матрица рисков, анализ ошибок системы</h2>
                 </header> */}
 
-                <div className="main-content">
+                <div className="main-content" style={{gridTemplateRows: '30px auto auto'}}>
                     {/* Левая панель - Аналитика */}
-                    <Stack gap={0} w='100%'>
-                        <div className="section-header">
-                            <h3>АНАЛИТИКА</h3>
-                        </div>
-                        <div className="left-panel">
-                            <AnalyticsSection
-                                analytics={humanFactorData.analytics}
-                                riskIdentification={humanFactorData.riskIdentification}
-                                riskResponse={humanFactorData.riskResponse}
-                                onRiskClick={handleRiskClick}
-                            />
-                        </div>
-                    </Stack>
+                    <div className="section-header" style={{ gridColumn: '1', gridRow: '1', height: 'fit-content' }}>
+                        <h3>АНАЛИТИКА</h3>
+                    </div>
+                    <div className="left-panel" style={{ gridColumn: '1', gridRow: '2 / span 2' }}>
+                        <AnalyticsSection
+                            analytics={humanFactorData.analytics}
+                            riskIdentification={humanFactorData.riskIdentification}
+                            riskResponse={humanFactorData.riskResponse}
+                            onRiskClick={handleRiskClick}
+                        />
+                    </div>
+                    {/* <Stack gap={0} w='100%'>
+
+                    </Stack> */}
 
 
                     {/* Центральная панель */}
-                    <div className="center-panel" style={{gap: '8px', padding: '0', background: 'none', boxShadow: 'none' }}>
-                        <div className="section-header" style={{marginBottom: '0px'}}>
-                            <h3 style={{margin: 0, padding: 0, fontSize: '1.17em'}}>ВЗАИМОСВЯЗЬ КОМПОНЕНТОВ ЧЕЛОВЕЧЕСКОГО ФАКТОРА</h3>
-                        </div>
+                    <div className="section-header" style={{ marginBottom: '0px', gridColumn: '2', gridRow: '1', height: 'fit-content' }}>
+                        <h3 style={{ margin: 0, padding: 0, fontSize: '1.17em' }}>ВЗАИМОСВЯЗЬ КОМПОНЕНТОВ ЧЕЛОВЕЧЕСКОГО ФАКТОРА</h3>
+                    </div>
+                    {/* <div className="center-panel" style={{ gap: '8px', padding: '0', background: 'none', boxShadow: 'none', gridColumn: '2', gridRow: '2 / span 2' }}> */}
+
                         <ComponentRelationsSection
                             data={data?.scatter_data}
                             animated={animationTrigger}
@@ -234,13 +240,14 @@ const HumanFactorMonitor = () => {
                             animated={animationTrigger}
                             threshold={data?.risk_trend_threshold}
                         />
-                    </div>
+                    {/* </div> */}
 
                     {/* Правая панель */}
-                    <div className="right-panel" style={{gap: '8px', padding: '0', background: 'none', boxShadow: 'none' }}>
-                        <div className="section-header" style={{marginBottom: '0px'}}>
-                            <h3 style={{margin: 0, padding: 0, fontSize: '1.17em'}}>РЕАЛИЗАЦИЯ РИСКОВ ЧЕЛОВЕЧЕСКОГО ФАКТОРА</h3>
-                        </div>
+                    <div className="section-header" style={{ marginBottom: '0px', gridColumn: '3', gridRow: '1', height: 'fit-content' }}>
+                        <h3 style={{ margin: 0, padding: 0, fontSize: '1.17em' }}>РЕАЛИЗАЦИЯ РИСКОВ ЧЕЛОВЕЧЕСКОГО ФАКТОРА</h3>
+                    </div>
+                    {/* <div className="right-panel" style={{ gap: '8px', padding: '0', background: 'none', boxShadow: 'none', gridColumn: '3', gridRow: '2 / span 2' }}> */}
+
                         <RightPanelMatrixSection
                             matrix={humanFactorData.rightMatrix}
                             onMatrixClick={handleMatrixClick}
@@ -249,7 +256,7 @@ const HumanFactorMonitor = () => {
                             trendData={data?.category_trends}
                             animated={animationTrigger}
                         />
-                    </div>
+                    {/* </div> */}
                 </div>
 
                 {/* Модальное окно */}

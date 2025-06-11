@@ -5,9 +5,9 @@
 const ComponentRelationsSection = ({ data, animated }: any) => {
 
     return (
-        <div className="component-relations">
+        <div className="component-relations" style={{padding: 16, gridRow: '2', gridColumn: '2'}}>
             <div className="scatter-chart">
-                <svg width="100%" height="300" viewBox="0 0 700 300">
+                <svg width="100%" height="380" viewBox="0 0 700 380">
                     {/* Сетка */}
                     <defs>
                         <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -17,19 +17,19 @@ const ComponentRelationsSection = ({ data, animated }: any) => {
                     <rect width="100%" height="100%" fill="url(#grid)" />
                     
                     {/* Оси */}
-                    <line x1="40" y1="280" x2="680" y2="280" stroke="#333" strokeWidth="2"/>
-                    <line x1="40" y1="280" x2="40" y2="20" stroke="#333" strokeWidth="2"/>
+                    <line x1="40" y1="360" x2="680" y2="360" stroke="#333" strokeWidth="2"/>
+                    <line x1="40" y1="360" x2="40" y2="20" stroke="#333" strokeWidth="2"/>
                     
                     {/* Подписи осей */}
-                    <text x="360" y="295" textAnchor="middle" fontSize="12" fill="#666">Время</text>
-                    <text x="20" y="150" textAnchor="middle" fontSize="12" fill="#666" transform="rotate(-90 20 150)">Интенсивность</text>
+                    <text x="360" y="375" textAnchor="middle" fontSize="12" fill="#666">Время</text>
+                    <text x="-20" y="150" textAnchor="middle" fontSize="12" fill="#666" transform="rotate(-90 20 150)">Интенсивность</text>
                     
                     {/* Данные */}
                     {data && data.map((point: any, index: number) => (
                         <circle
                             key={index}
                             cx={40 + (point.x * 24)}
-                            cy={280 - (point.y * 1.2)}
+                            cy={360 - (point.y * 1.2)}
                             r={10}
                             fill={point.color}
                             opacity={animated ? 0.8 : 0}
