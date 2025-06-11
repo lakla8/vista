@@ -169,6 +169,7 @@ const StreamBlock = () => {
                 </Stack>
                 <Stack gap={10} align="center">
                     <TasksGanttSection tasks={data?.profile.tasks || []} onTaskClick={() => { }} />
+                    <StackedBar />
                 </Stack>
 
                 <Stack gap={10} align="center">
@@ -197,7 +198,6 @@ const StreamBlock = () => {
                 </Stack>
             </Group>
             
-                    <StackedBar />
         </ContentBlock>
 
     </Stack>)
