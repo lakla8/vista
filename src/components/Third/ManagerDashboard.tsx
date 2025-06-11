@@ -59,10 +59,10 @@ const ManagerDashboard = () => {
     
         useEffect(() => {
             window.scrollTo(0, 0);
-            setData(HR_ANALYTICS_DATA as HrAnalyticsDataType);
-            // fetch('/api/v1/department_analytics', { method: 'GET' })
-            //     .then(response => response.json())
-            //     .then(data => setData(data));
+            // setData(HR_ANALYTICS_DATA as HrAnalyticsDataType);
+            fetch('/api/v1/hr_analytics', { method: 'GET' })
+                .then(response => response.json())
+                .then(data => setData(data));
         }, [])
     
     

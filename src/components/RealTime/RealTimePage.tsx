@@ -4,7 +4,7 @@ import StreamBlock from "./StreamBlock";
 import BondsBlock from "./BondsBlock";
 import EarlyWarningBlock from "./EarlyWarningBlock";
 import { createContext, useEffect, useState } from "react";
-import { REAL_TIME_DATA } from "../../backend_constants/real_time";
+// import { REAL_TIME_DATA } from "../../backend_constants/real_time";
 
 type DataType = {
     stream: {
@@ -61,12 +61,12 @@ const RealTimePage = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        /* 
+         
         fetch('/api/v1/real_time', { method: 'GET' })
             .then(response => response.json())
             .then(data => setData(data));
-        */
-       setData(REAL_TIME_DATA as DataType);
+        
+    //    setData(REAL_TIME_DATA as DataType);
     }, [])
 
     return (<>

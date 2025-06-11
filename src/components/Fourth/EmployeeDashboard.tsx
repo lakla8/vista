@@ -23,7 +23,7 @@ TODO ДЛЯ BACKEND ИНТЕГРАЦИИ:
 
 import { useState, useEffect, useRef, createContext } from 'react';
 import './EmployeeDashboard.css';
-import { DEPARTMENT_ANALYTICS_DATA } from '../../backend_constants/department_analytics';
+// import { DEPARTMENT_ANALYTICS_DATA } from '../../backend_constants/department_analytics';
 import Modal from './Modal';
 import FactorsSection from '../Fourth/FactorsSection';
 import AIAssistant from './AIAssistant';
@@ -69,10 +69,10 @@ const EmployeeDashboard = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        setData(DEPARTMENT_ANALYTICS_DATA as DepartmentAnalyticsDataContextType);
-        // fetch('/api/v1/department_analytics', { method: 'GET' })
-        //     .then(response => response.json())
-        //     .then(data => setData(data));
+        // setData(DEPARTMENT_ANALYTICS_DATA as DepartmentAnalyticsDataContextType);
+        fetch('/api/v1/department_analytics', { method: 'GET' })
+            .then(response => response.json())
+            .then(data => setData(data));
     }, [])
 
 

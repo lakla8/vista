@@ -37,10 +37,10 @@ const HumanFactorMonitor = () => {
     
     useEffect(() => {
         window.scrollTo(0, 0);
-        setData(MATRIX_RISKS_DATA as MatrixRisksType);
-        // fetch('/api/v1/matrix_risks', { method: 'GET' })
-        //     .then(response => response.json())
-        //     .then(data => setData(data));
+        // setData(MATRIX_RISKS_DATA as MatrixRisksType);
+        fetch('/api/v1/matrix_risks', { method: 'GET' })
+            .then(response => response.json())
+            .then(data => setData(data));
     }, [])
 
     // ===========================================
