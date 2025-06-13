@@ -161,7 +161,7 @@ export const REAL_TIME_DATA = {
   ],
   "profile": {
     "full_name": "Ivanov I.I.",
-    "employee_id": "6725473",
+    "employee_id": "363893",
     "shift": "Shift 3",
     "department": "Dept X",
     "position": "Senior Manager",

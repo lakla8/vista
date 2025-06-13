@@ -45,9 +45,10 @@ const TrendChartsSection = ({ trendData, animated }: any) => {
                     display: 'flex', 
                     gap: '12px', 
                     marginBottom: '5px',
-                    fontSize: '11px',
+                    fontSize: '16px',
                     flexWrap: 'wrap',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    marginTop: '10px'
                 }}>
                     {chartData.map((series, index) => (
                         <div key={index} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>

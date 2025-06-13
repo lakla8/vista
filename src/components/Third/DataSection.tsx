@@ -21,6 +21,7 @@ const DataSection = ({ metrics, onMetricClick }: any) => {
                 </div>
                 <div 
                     className="metric-card okr"
+                    style={{ background: ' #a05b87'}}
                     onClick={() => handleMetricClick('OKR', metrics.okr)}
                 >
                     <span className="value">OKR {metrics.okr}</span>

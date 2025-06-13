@@ -210,7 +210,7 @@ export const MATRIX_RISKS_DATA = {
   "risk_trend_threshold": 13.5,
   "category_trends": [
     {
-      "category": "personnel",
+      "category": "Персонал",
       "points": [
         {
           "period": "Sep",
@@ -239,7 +239,7 @@ export const MATRIX_RISKS_DATA = {
       ]
     },
     {
-      "category": "teams",
+      "category": "Команды",
       "points": [
         {
           "period": "Sep",
@@ -268,7 +268,7 @@ export const MATRIX_RISKS_DATA = {
       ]
     },
     {
-      "category": "culture",
+      "category": "Культура",
       "points": [
         {
           "period": "Sep",
@@ -297,7 +297,7 @@ export const MATRIX_RISKS_DATA = {
       ]
     },
     {
-      "category": "processes",
+      "category": "Процессы",
       "points": [
         {
           "period": "Sep",
@@ -326,7 +326,7 @@ export const MATRIX_RISKS_DATA = {
       ]
     },
     {
-      "category": "equipment",
+      "category": "Оборудование",
       "points": [
         {
           "period": "Sep",

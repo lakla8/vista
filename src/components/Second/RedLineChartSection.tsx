@@ -7,6 +7,10 @@ const RedLineChartSection = ({ data, animated, threshold }: any) => {
     if (!data) return null;
     return (
         <div className="red-line-chart" style={{gridColumn: '2', gridRow: '3'}}>
+            <div style={{position: 'relative', display: 'flex', width: '100%', zIndex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                <p style={{ fontSize: '16px', color: 'black'}}>Общее состояние системы человеческого фактора</p>
+            </div>
+            
             <div className="chart-container" style={{ background: 'white', marginTop: '-20px' }}>
                 <svg width="100%" height="300" viewBox="0 0 700 300">
                     {/* Сетка */}

@@ -185,6 +185,9 @@ const StreamBlock = () => {
                         <Text lh={1} c='black' fz={16}>№***** - до 000000</Text>
                         <Text lh={1} c='black' fz={16}>№***** - до 000000</Text>
                     </Stack>
+                </Stack>
+            </Group>
+            <Group gap={20} wrap="nowrap" justify="center">
                     <Stack gap={10} w={'100%'}>
                         <Text lh={1} c='green' fz={16} fw='600'>ДОСТИЖЕНИЯ</Text>
                         <Text lh={1} c='black' fz={16}>Управление командой</Text>
@@ -195,9 +198,7 @@ const StreamBlock = () => {
                         <Text lh={1} c='black' fz={16}>10/05/30 - 5й SOP</Text>
                         <Text lh={1} c='black' fz={16}>24.07.28 - конфликт</Text>
                     </Stack>
-                </Stack>
             </Group>
-            
         </ContentBlock>
 
     </Stack>)
