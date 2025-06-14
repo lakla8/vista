@@ -55,7 +55,16 @@ const StreamBlock = () => {
             setProfile(data.profile);
         }
     }, [data]);
-    
+
+    function getBg(item : any) {
+        return item.logs.some((log: any) => {
+            return (log.description.toLowerCase().includes('ошибка') ||
+                log.description.toLowerCase().includes('конфликт') ||
+                log.description.toLowerCase().includes('нарушение') ||
+                log.description.toLowerCase().includes('conflict') 
+            )
+        }) ? 'red' : 'white'
+    }
 
 
     return (<Stack w='100%' gap={10} h='100%'>
@@ -88,7 +97,7 @@ const StreamBlock = () => {
                     <Stack gap={10} w='100%'>
                         {stream.map((item) => {
                             return (
-                                <Text style={{textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}} lh={1} c='black' fz={12}>{item.employee_id}&nbsp;</Text>
+                                <Text style={{ textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} lh={1} c='black' fz={12}>{item.employee_id}&nbsp;</Text>
                             )
                         })}
                     </Stack>
@@ -97,7 +106,7 @@ const StreamBlock = () => {
                     <Stack gap={10} w='100%'>
                         {stream.map((item) => {
                             return (
-                                <Text style={{textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}} lh={1} c='black' fz={12}>{item.date}&nbsp;</Text>
+                                <Text style={{ textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} lh={1} c='black' fz={12}>{item.date}&nbsp;</Text>
                             )
                         })}
                     </Stack>
@@ -106,7 +115,7 @@ const StreamBlock = () => {
                     <Stack gap={10} w='100%'>
                         {stream.map((item) => {
                             return (
-                                <Text style={{textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}} lh={1} c='black' fz={12}>{item.start_time}&nbsp;</Text>
+                                <Text style={{ textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} lh={1} c='black' fz={12}>{item.start_time}&nbsp;</Text>
                             )
                         })}
                     </Stack>
@@ -115,7 +124,7 @@ const StreamBlock = () => {
                     <Stack gap={10} w='100%'>
                         {stream.map((item) => {
                             return (
-                                <Text style={{textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}} lh={1} c='black' fz={12}>{item.breaks.long} long {item.breaks.short} short&nbsp;</Text>
+                                <Text style={{ textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} lh={1} c='black' fz={12}>{item.breaks.long} long {item.breaks.short} short&nbsp;</Text>
                             )
                         })}
                     </Stack>
@@ -124,7 +133,9 @@ const StreamBlock = () => {
                     <Stack gap={10} w='100%'>
                         {stream.map((item) => {
                             return (
-                                <Text lh={1} style={{textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}}  c='black' fz={12}>{item.logs.map((log) => `${log.count} ${log.description} `)}&nbsp;</Text>
+                                <Text bg={{
+                                    bg: getBg(item),
+                                }} lh={1} style={{ textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} c='black' fz={12}>{item.logs.map((log) => `${log.count} ${log.description} `)}&nbsp;</Text>
                             )
                         })}
                     </Stack>
@@ -133,7 +144,7 @@ const StreamBlock = () => {
                     <Stack gap={10} w='100%'>
                         {stream.map((item) => {
                             return (
-                                <Text style={{textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden'}} lh={1} c='black' fz={12}>{item.additional_info}&nbsp;</Text>
+                                <Text style={{ textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} lh={1} c='black' fz={12}>{item.additional_info}&nbsp;</Text>
                             )
                         })}
                     </Stack>
@@ -185,9 +196,6 @@ const StreamBlock = () => {
                         <Text lh={1} c='black' fz={16}>№***** - до 000000</Text>
                         <Text lh={1} c='black' fz={16}>№***** - до 000000</Text>
                     </Stack>
-                </Stack>
-            </Group>
-            <Group gap={20} wrap="nowrap" justify="center">
                     <Stack gap={10} w={'100%'}>
                         <Text lh={1} c='green' fz={16} fw='600'>ДОСТИЖЕНИЯ</Text>
                         <Text lh={1} c='black' fz={16}>Управление командой</Text>
@@ -198,7 +206,9 @@ const StreamBlock = () => {
                         <Text lh={1} c='black' fz={16}>10/05/30 - 5й SOP</Text>
                         <Text lh={1} c='black' fz={16}>24.07.28 - конфликт</Text>
                     </Stack>
+                </Stack>
             </Group>
+
         </ContentBlock>
 
     </Stack>)
