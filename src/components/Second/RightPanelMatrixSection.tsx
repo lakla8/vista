@@ -1,4 +1,3 @@
-
 // ===========================================
 // КОМПОНЕНТ МАТРИЦЫ ПРАВОЙ ПАНЕЛИ (ОБНОВЛЕННЫЙ С MANTINE)
 // ===========================================
@@ -122,19 +121,30 @@ const RightPanelMatrixSection = ({ onMatrixClick }: any) => {
                         <div key={index} style={{ 
                             display: 'flex', 
                             alignItems: 'center', 
-                            gap: '8px',
+                            gap: '10px',
                             background: category.color,
-                            borderRadius: '20px',
-                            padding: '8px 16px',
-                            fontSize: '11px',
+                            borderRadius: '25px',
+                            padding: '15px 20px',
+                            fontSize: '14px',
                             fontWeight: 'bold',
                             color: 'white',
                             textTransform: 'uppercase',
-                            letterSpacing: '0.3px',
-                            boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
-                            height: '32px',
-                            minHeight: '32px'
-                        }}>
+                            letterSpacing: '0.5px',
+                            boxShadow: '0 3px 8px rgba(0,0,0,0.2)',
+                            height: '45px',
+                            minHeight: '45px',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s ease'
+                        }}
+                        onMouseEnter={(e: any) => {
+                            e.target.style.transform = 'translateY(-2px) scale(1.02)';
+                            e.target.style.boxShadow = '0 6px 15px rgba(0,0,0,0.3)';
+                        }}
+                        onMouseLeave={(e: any) => {
+                            e.target.style.transform = 'translateY(0) scale(1)';
+                            e.target.style.boxShadow = '0 3px 8px rgba(0,0,0,0.2)';
+                        }}
+                        >
                             <span style={{ 
                                 overflow: 'hidden',
                                 textOverflow: 'ellipsis',

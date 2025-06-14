@@ -57,15 +57,54 @@ const StreamBlock = () => {
     }, [data]);
 
     function getBg(item : any) {
-        return item.logs.some((log: any) => {
+        // Проверяем критичные события (красный цвет)
+        const hasCriticalEvents = item.logs.some((log: any) => {
             return (log.description.toLowerCase().includes('ошибка') ||
                 log.description.toLowerCase().includes('конфликт') ||
                 log.description.toLowerCase().includes('нарушение') ||
-                log.description.toLowerCase().includes('conflict') 
+                log.description.toLowerCase().includes('conflict') ||
+                log.description.toLowerCase().includes('error') ||
+                log.description.toLowerCase().includes('violation')
             )
-        }) ? 'red' : 'white'
+        });
+
+        // Проверяем предупреждения (желтый цвет)
+        const hasWarnings = item.logs.some((log: any) => {
+            return (log.description.toLowerCase().includes('внимание') ||
+                log.description.toLowerCase().includes('attention') ||
+                log.description.toLowerCase().includes('warning') ||
+                log.description.toLowerCase().includes('предупреждение')
+            )
+        }) || item.additional_info.some((info: string) => {
+            return (info.toLowerCase().includes('внимание') ||
+                info.toLowerCase().includes('attention') ||
+                info.toLowerCase().includes('extra attention') ||
+                info.toLowerCase().includes('обр. внимание')
+            )
+        });
+
+        if (hasCriticalEvents) {
+            return '#ffcccb'; // Светло-красный
+        } else if (hasWarnings) {
+            return '#fff3cd'; // Светло-желтый
+        }
+        return 'white';
     }
 
+    function getAdditionalInfoBg(item: any) {
+        // Проверяем дополнительную информацию на предупреждения
+        const hasWarnings = item.additional_info.some((info: string) => {
+            return (info.toLowerCase().includes('внимание') ||
+                info.toLowerCase().includes('attention') ||
+                info.toLowerCase().includes('extra attention') ||
+                info.toLowerCase().includes('обр. внимание') ||
+                info.toLowerCase().includes('prof. prognosis needed') ||
+                info.toLowerCase().includes('проф. прогноз')
+            )
+        });
+
+        return hasWarnings ? '#fff3cd' : 'white'; // Желтый для предупреждений
+    }
 
     return (<Stack w='100%' gap={10} h='100%'>
         <BlockTitle>STREAM - ПОТОКОВЫЕ ДАННЫЕ О СОТРУДНИКАХ И НАГРУЗКЕ</BlockTitle>
@@ -97,7 +136,22 @@ const StreamBlock = () => {
                     <Stack gap={10} w='100%'>
                         {stream.map((item) => {
                             return (
-                                <Text style={{ textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} lh={1} c='black' fz={12}>{item.employee_id}&nbsp;</Text>
+                                <Text 
+                                    style={{ 
+                                        textWrap: 'nowrap', 
+                                        textOverflow: 'ellipsis', 
+                                        overflow: 'hidden',
+                                        minHeight: '22px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        padding: '2px 4px'
+                                    }} 
+                                    lh={1} 
+                                    c='black' 
+                                    fz={12}
+                                >
+                                    {item.employee_id}&nbsp;
+                                </Text>
                             )
                         })}
                     </Stack>
@@ -106,7 +160,22 @@ const StreamBlock = () => {
                     <Stack gap={10} w='100%'>
                         {stream.map((item) => {
                             return (
-                                <Text style={{ textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} lh={1} c='black' fz={12}>{item.date}&nbsp;</Text>
+                                <Text 
+                                    style={{ 
+                                        textWrap: 'nowrap', 
+                                        textOverflow: 'ellipsis', 
+                                        overflow: 'hidden',
+                                        minHeight: '22px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        padding: '2px 4px'
+                                    }} 
+                                    lh={1} 
+                                    c='black' 
+                                    fz={12}
+                                >
+                                    {item.date}&nbsp;
+                                </Text>
                             )
                         })}
                     </Stack>
@@ -115,7 +184,22 @@ const StreamBlock = () => {
                     <Stack gap={10} w='100%'>
                         {stream.map((item) => {
                             return (
-                                <Text style={{ textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} lh={1} c='black' fz={12}>{item.start_time}&nbsp;</Text>
+                                <Text 
+                                    style={{ 
+                                        textWrap: 'nowrap', 
+                                        textOverflow: 'ellipsis', 
+                                        overflow: 'hidden',
+                                        minHeight: '22px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        padding: '2px 4px'
+                                    }} 
+                                    lh={1} 
+                                    c='black' 
+                                    fz={12}
+                                >
+                                    {item.start_time}&nbsp;
+                                </Text>
                             )
                         })}
                     </Stack>
@@ -124,7 +208,22 @@ const StreamBlock = () => {
                     <Stack gap={10} w='100%'>
                         {stream.map((item) => {
                             return (
-                                <Text style={{ textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} lh={1} c='black' fz={12}>{item.breaks.long} long {item.breaks.short} short&nbsp;</Text>
+                                <Text 
+                                    style={{ 
+                                        textWrap: 'nowrap', 
+                                        textOverflow: 'ellipsis', 
+                                        overflow: 'hidden',
+                                        minHeight: '22px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        padding: '2px 4px'
+                                    }} 
+                                    lh={1} 
+                                    c='black' 
+                                    fz={12}
+                                >
+                                    {item.breaks.long} long {item.breaks.short} short&nbsp;
+                                </Text>
                             )
                         })}
                     </Stack>
@@ -133,9 +232,25 @@ const StreamBlock = () => {
                     <Stack gap={10} w='100%'>
                         {stream.map((item) => {
                             return (
-                                <Text bg={{
-                                    bg: getBg(item),
-                                }} lh={1} style={{ textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} c='black' fz={12}>{item.logs.map((log) => `${log.count} ${log.description} `)}&nbsp;</Text>
+                                <Text 
+                                    style={{ 
+                                        textWrap: 'nowrap', 
+                                        textOverflow: 'ellipsis', 
+                                        overflow: 'hidden',
+                                        backgroundColor: getBg(item),
+                                        padding: '2px 4px',
+                                        borderRadius: '3px',
+                                        transition: 'background-color 0.3s ease',
+                                        minHeight: '22px',
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                    }} 
+                                    lh={1} 
+                                    c='black' 
+                                    fz={12}
+                                >
+                                    {item.logs.map((log) => `${log.count} ${log.description} `)}&nbsp;
+                                </Text>
                             )
                         })}
                     </Stack>
@@ -144,7 +259,25 @@ const StreamBlock = () => {
                     <Stack gap={10} w='100%'>
                         {stream.map((item) => {
                             return (
-                                <Text style={{ textWrap: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }} lh={1} c='black' fz={12}>{item.additional_info}&nbsp;</Text>
+                                <Text 
+                                    style={{ 
+                                        textWrap: 'nowrap', 
+                                        textOverflow: 'ellipsis', 
+                                        overflow: 'hidden',
+                                        backgroundColor: getAdditionalInfoBg(item),
+                                        padding: '2px 4px',
+                                        borderRadius: '3px',
+                                        transition: 'background-color 0.3s ease',
+                                        minHeight: '22px',
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                    }} 
+                                    lh={1} 
+                                    c='black' 
+                                    fz={12}
+                                >
+                                    {item.additional_info}&nbsp;
+                                </Text>
                             )
                         })}
                     </Stack>
@@ -153,62 +286,69 @@ const StreamBlock = () => {
         </ContentBlock>
 
         <ContentBlock w='100%' h='100%' justify={'space-between'}>
-            <Group wrap="nowrap" align="start" w='100%' gap={20}>
-                <Stack gap={10} align="center">
-                    <Text fz={32} lh={1} c='#8C0436' fw='600'>ПРОФАЙЛ</Text>
-                    <ContentBlock variant="outlined" p={10} gap={20} direction="row">
-                        <FaRegUser size={64} />
-                        <Stack gap={10}>
-                            <Text lh={1} c='black' fz={16}>{profile?.full_name}</Text>
-                            <Text lh={1} c='black' fz={16}>ID {profile?.employee_id}</Text>
-                            <Text lh={1} c='black' fz={16}>Смена 3</Text>
+            <Stack gap={8} w='100%'>
+                {/* Верхняя часть - профиль слева + расширенные графики справа */}
+                <Group wrap="nowrap" align="start" w='100%' gap={12}>
+                    <Stack gap={8} align="center">
+                        <Text fz={24} lh={1} c='#8C0436' fw='600'>ПРОФАЙЛ</Text>
+                        <ContentBlock variant="outlined" p={8} gap={10} direction="row">
+                            <FaRegUser size={48} />
+                            <Stack gap={6}>
+                                <Text lh={1} c='black' fz={14}>{profile?.full_name}</Text>
+                                <Text lh={1} c='black' fz={14}>ID {profile?.employee_id}</Text>
+                                <Text lh={1} c='black' fz={14}>Смена 3</Text>
+                            </Stack>
+                        </ContentBlock>
+
+                        <Stack gap={6} w={'100%'}>
+                            <Text lh={1} c='black' fz={14}>Департамент - {profile?.department}</Text>
+                            <Text lh={1} c='black' fz={14}>Позиция - {profile?.position}</Text>
+                            <Text lh={1} c='black' fz={14}>Руководитель - {profile?.manager}</Text>
+                            <Text lh={1} c='black' fz={14}>Сменный - {profile?.shift}</Text>
+                            <Text lh={1} c='black' fz={14}>{profile?.contact}</Text>
                         </Stack>
-                    </ContentBlock>
 
-                    <Stack gap={10} w={'100%'}>
-                        <Text lh={1} c='black' fz={16}>Департамент - {profile?.department}</Text>
-                        <Text lh={1} c='black' fz={16}>Позиция - {profile?.position}</Text>
-                        <Text lh={1} c='black' fz={16}>Руководитель - {profile?.manager}</Text>
-                        <Text lh={1} c='black' fz={16}>Сменный - {profile?.shift}</Text>
-                        <Text lh={1} c='black' fz={16}>{profile?.contact}</Text>
+                        <Stack gap={6} w={'100%'} mt={10}>
+                            <Text lh={1} c='black' fz={14}>HRV - {profile?.hrv}</Text>
+                            <Text lh={1} c='black' fz={14}>Проф. прогноз - {profile?.prognosis_group} группа</Text>
+                        </Stack>
                     </Stack>
+                    
+                    {/* Расширенная область для графиков */}
+                    <Stack gap={8} align="center" style={{ flex: 1 }}>
+                        <TasksGanttSection tasks={data?.profile.tasks || []} onTaskClick={() => { }} />
+                        <StackedBar />
+                    </Stack>
+                </Group>
 
-                    <Stack gap={10} w={'100%'} mt={20}>
-                        <Text lh={1} c='black' fz={16}>HRV - {profile?.hrv}</Text>
-                        <Text lh={1} c='black' fz={16}>Проф. прогноз - {profile?.prognosis_group} группа</Text>
+                {/* Нижняя часть - блоки на всю ширину */}
+                <Group gap={12} w='100%' grow>
+                    <Stack gap={8} w={'100%'}>
+                        <Text lh={1} c='black' fz={18} fw='700'>ДОПУСКИ</Text>
+                        <Text lh={1} c='black' fz={15}>Name - до 000000</Text>
+                        <Text lh={1} c='black' fz={15}>Name - до 000000</Text>
+                        <Text lh={1} c='black' fz={15}>Name - до 000000</Text>
                     </Stack>
-                </Stack>
-                <Stack gap={10} align="center">
-                    <TasksGanttSection tasks={data?.profile.tasks || []} onTaskClick={() => { }} />
-                    <StackedBar />
-                </Stack>
-
-                <Stack gap={10} align="center">
-                    <Stack gap={10} w={'100%'}>
-                        <Text lh={1} c='black' fz={16} fw='600'>ДОПУСКИ</Text>
-                        <Text lh={1} c='black' fz={16}>Name - до 000000</Text>
-                        <Text lh={1} c='black' fz={16}>Name - до 000000</Text>
-                        <Text lh={1} c='black' fz={16}>Name - до 000000</Text>
+                    <Stack gap={8} w={'100%'}>
+                        <Text lh={1} c='black' fz={18} fw='700'>СЕРТИФИКАТЫ</Text>
+                        <Text lh={1} c='black' fz={15}>№***** - до 000000</Text>
+                        <Text lh={1} c='black' fz={15}>№***** - до 000000</Text>
+                        <Text lh={1} c='black' fz={15}>№***** - до 000000</Text>
                     </Stack>
-                    <Stack gap={10} w={'100%'}>
-                        <Text lh={1} c='black' fz={16} fw='600'>СЕРТИФИКАТЫ</Text>
-                        <Text lh={1} c='black' fz={16}>№***** - до 000000</Text>
-                        <Text lh={1} c='black' fz={16}>№***** - до 000000</Text>
-                        <Text lh={1} c='black' fz={16}>№***** - до 000000</Text>
+                    <Stack gap={8} w={'100%'}>
+                        <Text lh={1} c='green' fz={18} fw='700'>ДОСТИЖЕНИЯ</Text>
+                        <Text lh={1} c='black' fz={15}>Управление командой</Text>
+                        <Text lh={1} c='black' fz={15}>Кризисные ситуации</Text>
+                        <Text lh={1} c='black' fz={15}>Работа в команде</Text>
                     </Stack>
-                    <Stack gap={10} w={'100%'}>
-                        <Text lh={1} c='green' fz={16} fw='600'>ДОСТИЖЕНИЯ</Text>
-                        <Text lh={1} c='black' fz={16}>Управление командой</Text>
-                        <Text lh={1} c='black' fz={16}>Кризисные ситуации</Text>
+                    <Stack gap={8} w={'100%'}>
+                        <Text lh={1} c='#921640' fz={18} fw='700'>ОШИБКИ</Text>
+                        <Text lh={1} c='black' fz={15}>10/05/30 - 5й SOP</Text>
+                        <Text lh={1} c='black' fz={15}>24.07.28 - конфликт</Text>
+                        <Text lh={1} c='black' fz={15}>15.08.29 - нарушение</Text>
                     </Stack>
-                    <Stack gap={10} w={'100%'}>
-                        <Text lh={1} c='#921640' fz={16} fw='600'>ОШИБКИ</Text>
-                        <Text lh={1} c='black' fz={16}>10/05/30 - 5й SOP</Text>
-                        <Text lh={1} c='black' fz={16}>24.07.28 - конфликт</Text>
-                    </Stack>
-                </Stack>
-            </Group>
-
+                </Group>
+            </Stack>
         </ContentBlock>
 
     </Stack>)

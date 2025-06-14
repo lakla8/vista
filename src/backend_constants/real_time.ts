@@ -14,16 +14,16 @@ export const REAL_TIME_DATA = {
           "description": "drop"
         },
         {
-          "count": 3,
-          "description": "drop"
+          "count": 1,
+          "description": "attention"
         }
       ],
       "additional_info": [
-        "Extra attention"
+        "Обр. внимание"
       ]
     },
     {
-      "employee_id": "363893",
+      "employee_id": "246891",
       "date": "2025-06-06",
       "start_time": "10:05:12",
       "breaks": {
@@ -32,16 +32,16 @@ export const REAL_TIME_DATA = {
       },
       "logs": [
         {
-          "count": 2,
-          "description": "drop"
+          "count": 1,
+          "description": "conflict"
         },
         {
-          "count": 3,
-          "description": "drop"
+          "count": 1,
+          "description": "violation"
         }
       ],
       "additional_info": [
-        "Extra attention"
+        "Нарушение правил"
       ]
     },
     {

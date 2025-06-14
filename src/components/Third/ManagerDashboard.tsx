@@ -27,7 +27,6 @@ import { useState, useEffect, useRef, createContext } from 'react';
 import './ManagerDashboard.css';
 import Modal from '../Fourth/Modal';
 import TasksGanttSection, { type GanttTask } from '../App/Gantt';
-import AIAssistant from '../Fourth/AIAssistant';
 import BottomMetricsSection from './BottomMetricsSection';
 import DataSection from './DataSection';
 import FactorAnalyticsSection from './FactorAnalyticsSection';
@@ -51,8 +50,6 @@ const ManagerDashboard = () => {
     const [showModal, setShowModal] = useState(false);
     const [modalContent, setModalContent] = useState<any>({});
     const [selectedFactor, setSelectedFactor] = useState('Культура команды');
-    const [aiPosition, setAiPosition] = useState({ bottom: '20px', top: 'auto', left: '20px' });
-    const [aiExpanded, setAiExpanded] = useState(false);
     const [tooltip, setTooltip] = useState({ show: false, content: '', x: 0, y: 0 });
     const [chartAnimated, setChartAnimated] = useState(false);
 
@@ -72,11 +69,6 @@ const ManagerDashboard = () => {
 
     }, [])
 
-
-    // Refs для DOM элементов
-    const aiAssistantRef: any = useRef(null);
-    const isDragging = useRef(false);
-    const dragStart = useRef({ x: 0, y: 0, left: 0, top: 0 });
 
     // ===========================================
     // MOCK DATA (TODO: Заменить на API)
@@ -258,91 +250,6 @@ const ManagerDashboard = () => {
         setShowModal(true);
     };
 
-    const handleAIToggle = () => {
-        setAiExpanded(!aiExpanded);
-    };
-
-    const closeModal = () => {
-        setShowModal(false);
-    };
-
-    // ===========================================
-    // DRAG & DROP ФУНКЦИОНАЛЬНОСТЬ
-    // ===========================================
-    const handleMouseDown = (e: any) => {
-        if (!aiAssistantRef.current) return;
-
-        isDragging.current = true;
-        const rect = aiAssistantRef.current.getBoundingClientRect();
-        dragStart.current = {
-            x: e.clientX,
-            y: e.clientY,
-            left: rect.left,
-            top: rect.top
-        };
-
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseup', handleMouseUp);
-        e.preventDefault();
-    };
-
-    const handleMouseMove = (e: any) => {
-        if (!isDragging.current) return;
-
-        const deltaX = e.clientX - dragStart.current.x;
-        const deltaY = e.clientY - dragStart.current.y;
-
-        const newLeft = Math.max(0, Math.min(window.innerWidth - 350, dragStart.current.left + deltaX));
-        const newTop = Math.max(0, Math.min(window.innerHeight - 200, dragStart.current.top + deltaY));
-
-        setAiPosition({
-            left: `${newLeft}px`,
-            top: `${newTop}px`,
-            bottom: 'auto'
-        });
-    };
-
-    const handleMouseUp = () => {
-        isDragging.current = false;
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-    };
-
-    // ===========================================
-    // TOOLTIP ОБРАБОТЧИКИ
-    // ===========================================
-    const handleSegmentHover = (personName: any, segmentType: any, value: any, event: any) => {
-        const segmentTypeText: any = {
-            productive: 'Продуктивное',
-            active: 'Активное',
-            unproductive: 'Непродуктивное'
-        };
-
-        setTooltip({
-            show: true,
-            content: `${personName}\n${segmentTypeText[segmentType]}: ${value}`,
-            x: event.clientX + 15,
-            y: event.clientY - 10
-        });
-    };
-
-    const handleSegmentLeave = () => {
-        setTooltip({ show: false, content: '', x: 0, y: 0 });
-    };
-
-    const handleProjectSegmentHover = (teamName: any, segmentType: any, value: any, event: any) => {
-        setTooltip({
-            show: true,
-            content: `${teamName}\n${segmentType}: ${value}%`,
-            x: event.clientX + 15,
-            y: event.clientY - 10
-        });
-    };
-
-    const handleProjectSegmentLeave = () => {
-        setTooltip({ show: false, content: '', x: 0, y: 0 });
-    };
-
     const handleBottomMetricClick = (metricLabel: any, value: any, color: any) => {
         const getMetricAnalysis = (label: any, val: any, colorType: any) => {
             switch (label) {
@@ -400,6 +307,41 @@ const ManagerDashboard = () => {
             icon: "fas fa-analytics"
         });
         setShowModal(true);
+    };
+
+    // ===========================================
+    // TOOLTIP ОБРАБОТЧИКИ
+    // ===========================================
+    const handleSegmentHover = (personName: any, segmentType: any, value: any, event: any) => {
+        const segmentTypeText: any = {
+            productive: 'Продуктивное',
+            active: 'Активное',
+            unproductive: 'Непродуктивное'
+        };
+
+        setTooltip({
+            show: true,
+            content: `${personName}\n${segmentTypeText[segmentType]}: ${value}`,
+            x: event.clientX + 15,
+            y: event.clientY - 10
+        });
+    };
+
+    const handleSegmentLeave = () => {
+        setTooltip({ show: false, content: '', x: 0, y: 0 });
+    };
+
+    const handleProjectSegmentHover = (teamName: any, segmentType: any, value: any, event: any) => {
+        setTooltip({
+            show: true,
+            content: `${teamName}\n${segmentType}: ${value}%`,
+            x: event.clientX + 15,
+            y: event.clientY - 10
+        });
+    };
+
+    const handleProjectSegmentLeave = () => {
+        setTooltip({ show: false, content: '', x: 0, y: 0 });
     };
 
     // ===========================================
@@ -520,20 +462,92 @@ const ManagerDashboard = () => {
                 </div>
 
                 {/* НИЖНЯЯ СЕКЦИЯ */}
-                <FactorAnalyticsSection
-                    factors={managerData.factors}
-                    selectedFactor={selectedFactor}
-                    onFactorClick={handleFactorClick}
-                />
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'stretch' }}>
+                    {/* СТАТИЧЕСКИЙ AI АССИСТЕНТ СЛЕВА */}
+                    <div 
+                        className="ai-assistant-static"
+                        style={{
+                            width: '25%',
+                            background: 'white',
+                            borderRadius: '20px',
+                            padding: '15px',
+                            boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+                            marginBottom: '8px'
+                        }}
+                    >
+                        <div 
+                            className="ai-avatar"
+                            style={{
+                                position: 'absolute',
+                                top: '-12px',
+                                left: '15px',
+                                background: '#4a7c59',
+                                color: 'white',
+                                width: '35px',
+                                height: '35px',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: '.9em',
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            AI
+                        </div>
+                        <div 
+                            className="ai-conversation"
+                            style={{ marginTop: '12px' }}
+                        >
+                            <div 
+                                className="ai-message"
+                                style={{
+                                    background: '#f0f0f0',
+                                    padding: '10px 12px',
+                                    borderRadius: '15px',
+                                    marginBottom: '8px',
+                                    fontSize: '.85em',
+                                    lineHeight: '1.3'
+                                }}
+                            >
+                                <p>Сотрудник Савичева Е.С. переработала за неделю на 25% в часах.</p>
+                                <p>Проанализировать её данные?</p>
+                            </div>
+                            <div 
+                                className="user-response"
+                                style={{
+                                    background: '#4a7c59',
+                                    color: 'white',
+                                    padding: '10px 12px',
+                                    borderRadius: '15px',
+                                    fontSize: '.85em',
+                                    lineHeight: '1.3'
+                                }}
+                            >
+                                <p>Да. Подготовь отчет по проф. прогнозу и текущей нагрузке</p>
+                            </div>
+                        </div>
+                        <div 
+                            className="expand-indicator"
+                            style={{
+                                textAlign: 'center',
+                                marginTop: '8px',
+                                color: '#4a7c59',
+                                cursor: 'pointer',
+                                transition: 'transform 0.3s ease'
+                            }}
+                        >
+                            <i className="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
 
-                {/* AI АССИСТЕНТ */}
-                <AIAssistant
-                    ref={aiAssistantRef}
-                    position={aiPosition}
-                    expanded={aiExpanded}
-                    onMouseDown={handleMouseDown}
-                    onToggle={handleAIToggle}
-                />
+                    {/* БЛОК АНАЛИТИКИ КОМПОНЕНТОВ СПРАВА */}
+                    <FactorAnalyticsSection
+                        factors={managerData.factors}
+                        selectedFactor={selectedFactor}
+                        onFactorClick={handleFactorClick}
+                    />
+                </div>
             </div>
 
             {/* МОДАЛЬНОЕ ОКНО */}
@@ -542,7 +556,7 @@ const ManagerDashboard = () => {
                     title={modalContent.title}
                     content={modalContent.content}
                     icon={modalContent.icon}
-                    onClose={closeModal}
+                    onClose={() => setShowModal(false)}
                 />
             )}
 

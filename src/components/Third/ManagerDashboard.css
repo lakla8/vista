@@ -1309,6 +1309,9 @@ body {
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
     margin-top: auto;
     margin-bottom: 8px;
+    flex: 1;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .bottom-section h3 {
@@ -1795,4 +1798,13 @@ body {
         opacity: 1;
         transform: translateX(0) translateY(0);
     }
+}
+
+/* AI Assistant Static */
+.ai-assistant-static {
+    position: relative;
+}
+
+.ai-assistant-static .expand-indicator:hover {
+    transform: scale(1.2);
 }

@@ -257,12 +257,13 @@ CSS стили для компонента мониторинга человеч
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 12px;
+    padding: 12px 15px;
     background: #f8f9fa;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
     border-left: 3px solid transparent;
+    margin-bottom: 8px;
 }
 
 .risk-metric:hover {
@@ -282,20 +283,20 @@ CSS стили для компонента мониторинга человеч
 }
 
 .risk-label {
-    font-size: 12px;
+    font-size: 14px;
     color: #666;
     transition: all 0.3s ease;
 }
 
 .risk-value {
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     color: #666;
     transition: all 0.3s ease;
 }
 
 .risk-value.large {
-    font-size: 24px;
+    font-size: 26px;
     color: #666;
 }
 
@@ -321,10 +322,11 @@ CSS стили для компонента мониторинга человеч
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 6px 10px;
+    padding: 12px 15px;
     background: #f8f9fa;
-    border-radius: 4px;
-    font-size: 11px;
+    border-radius: 6px;
+    font-size: 14px;
+    margin-bottom: 8px;
 }
 
 .response-item-interactive {
@@ -360,12 +362,13 @@ CSS стили для компонента мониторинга человеч
 .response-label {
     color: #666;
     transition: all 0.3s ease;
+    font-size: 14px;
 }
 
 .response-value {
     font-weight: bold;
     color: #666;
-    font-size: 16px;
+    font-size: 18px;
     transition: all 0.3s ease;
 }
 
@@ -381,14 +384,14 @@ CSS стили для компонента мониторинга человеч
     background: #4a7c59;
     color: white;
     border: none;
-    padding: 8px 12px;
-    border-radius: 16px;
-    font-size: 10px;
+    padding: 15px 20px;
+    border-radius: 20px;
+    font-size: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
     width: 100%;
     justify-content: center;
     font-weight: bold;
@@ -402,7 +405,7 @@ CSS стили для компонента мониторинга человеч
 }
 
 .simulator-btn i {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 /* ===========================================
