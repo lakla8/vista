@@ -9,7 +9,7 @@ export const REAL_TIME_DATA = {
         "short": 2
       },
       "logs": [
-        {
+    {
           "count": 2,
           "description": "drop"
         },
