@@ -4,7 +4,7 @@
 import React from "react";
 
 // ===========================================
-const AIAssistant = React.forwardRef(({ position, onMouseDown }: any, ref: React.ForwardedRef<HTMLDivElement>) => {
+const AIAssistant = React.forwardRef(({ onMouseDown }: any, ref: React.ForwardedRef<HTMLDivElement>) => {
     return (
         <div
             ref={ref}
