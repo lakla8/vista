@@ -1,130 +1,124 @@
 export const REAL_TIME_DATA = {
   "stream": [
     {
-      "employee_id": "363893",
-      "date": "2025-06-06",
-      "start_time": "10:05:12",
-      "breaks": {
-        "long": 2,
-        "short": 2
-      },
-      "logs": [
-    {
-          "count": 2,
-          "description": "drop"
-        },
-        {
-          "count": 1,
-          "description": "attention"
-        }
-      ],
-      "additional_info": [
-        "Обр. внимание"
-      ]
+      "employee_id": "01927453",
+      "date": "2025-04-12",
+      "start_time": "12:02:53",
+      "breaks": {"long": 1, "short": 5},
+      "logs": [{"count": 3, "description": "снижения"}],
+      "additional_info": ["Доп. анализ"]
     },
     {
-      "employee_id": "246891",
-      "date": "2025-06-06",
-      "start_time": "10:05:12",
-      "breaks": {
-        "long": 2,
-        "short": 2
-      },
-      "logs": [
-        {
-          "count": 1,
-          "description": "conflict"
-        },
-        {
-          "count": 1,
-          "description": "violation"
-        }
-      ],
-      "additional_info": [
-        "Нарушение правил"
-      ]
+      "employee_id": "4632412",
+      "date": "2025-04-12",
+      "start_time": "14:33:16",
+      "breaks": {"long": 1, "short": 4},
+      "logs": [{"count": 1, "description": "снижение"}],
+      "additional_info": ["Обр. внимание"]
     },
     {
-      "employee_id": "785156",
-      "date": "2025-06-07",
-      "start_time": "10:36:08",
-      "breaks": {
-        "long": 2,
-        "short": 6
-      },
-      "logs": [
-        {
-          "count": 1,
-          "description": "drop"
-        }
-      ],
-      "additional_info": [
-        "Extra attention"
-      ]
+      "employee_id": "26575234",
+      "date": "2025-04-12",
+      "start_time": "12:02:53",
+      "breaks": {"long": 0, "short": 8},
+      "logs": [{"count": 3, "description": "раза"}, {"count": 1, "description": "ошибка"}],
+      "additional_info": ["Нужен отпуск"]
     },
     {
-      "employee_id": "278776",
-      "date": "2025-06-08",
-      "start_time": "09:34:23",
-      "breaks": {
-        "long": 2,
-        "short": 4
-      },
-      "logs": [
-        {
-          "count": 1,
-          "description": "overload"
-        },
-        {
-          "count": 1,
-          "description": "drop"
-        },
-        {
-          "count": 3,
-          "description": "attention"
-        }
-      ],
-      "additional_info": []
+      "employee_id": "05308972",
+      "date": "2025-04-12",
+      "start_time": "12:02:53",
+      "breaks": {"long": 1, "short": 5},
+      "logs": [{"count": 1, "description": "Норма"}],
+      "additional_info": ["Проф. прогноз"]
     },
     {
-      "employee_id": "954934",
-      "date": "2025-06-09",
-      "start_time": "11:51:04",
-      "breaks": {
-        "long": 1,
-        "short": 5
-      },
-      "logs": [
-        {
-          "count": 1,
-          "description": "conflict"
-        },
-        {
-          "count": 1,
-          "description": "drop"
-        }
-      ],
-      "additional_info": [
-        "Prof. prognosis needed"
-      ]
+      "employee_id": "0146745",
+      "date": "2025-04-12",
+      "start_time": "12:02:53",
+      "breaks": {"long": 1, "short": 3},
+      "logs": [{"count": 1, "description": "Норма"}],
+      "additional_info": ["Проф. прогноз"]
     },
     {
-      "employee_id": "996281",
-      "date": "2025-06-10",
-      "start_time": "09:35:50",
-      "breaks": {
-        "long": 0,
-        "short": 3
-      },
-      "logs": [
-        {
-          "count": 2,
-          "description": "overload"
-        }
-      ],
-      "additional_info": [
-        "Extra attention"
-      ]
+      "employee_id": "01235346",
+      "date": "2025-04-12",
+      "start_time": "12:02:53",
+      "breaks": {"long": 0, "short": 10},
+      "logs": [{"count": 1, "description": "Внимание"}],
+      "additional_info": ["Команда"]
+    },
+    {
+      "employee_id": "01097852",
+      "date": "2025-04-12",
+      "start_time": "12:02:53",
+      "breaks": {"long": 0, "short": 12},
+      "logs": [{"count": 1, "description": "Software"}],
+      "additional_info": ["Обр. внимание"]
+    },
+    {
+      "employee_id": "0235433",
+      "date": "2025-04-13",
+      "start_time": "12:02:53",
+      "breaks": {"long": 1, "short": 2},
+      "logs": [{"count": 1, "description": "Техника"}],
+      "additional_info": ["Команда"]
+    },
+    {
+      "employee_id": "56753896",
+      "date": "2025-04-14",
+      "start_time": "12:02:53",
+      "breaks": {"long": 1, "short": 6},
+      "logs": [{"count": 1, "description": "Норма"}],
+      "additional_info": ["Проф. прогноз"]
+    },
+    {
+      "employee_id": "0203424",
+      "date": "2025-04-14",
+      "start_time": "12:02:53",
+      "breaks": {"long": 1, "short": 5},
+      "logs": [{"count": 1, "description": "Норма"}],
+      "additional_info": ["Команда"]
+    },
+    {
+      "employee_id": "01099028",
+      "date": "2025-04-14",
+      "start_time": "12:02:53",
+      "breaks": {"long": 0, "short": 0},
+      "logs": [{"count": 1, "description": "Конфликт"}],
+      "additional_info": ["Проф. прогноз"]
+    },
+    {
+      "employee_id": "01923245",
+      "date": "2025-04-14",
+      "start_time": "12:02:53",
+      "breaks": {"long": 0, "short": 3},
+      "logs": [{"count": 1, "description": "Нарушение"}],
+      "additional_info": ["RCA - сводка"]
+    },
+    {
+      "employee_id": "24965494",
+      "date": "2025-04-14",
+      "start_time": "12:02:53",
+      "breaks": {"long": 2, "short": 2},
+      "logs": [{"count": 1, "description": "Норма"}],
+      "additional_info": ["Проф. прогноз"]
+    },
+    {
+      "employee_id": "10483409",
+      "date": "2025-04-14",
+      "start_time": "12:02:53",
+      "breaks": {"long": 1, "short": 0},
+      "logs": [{"count": 1, "description": "Давление"}],
+      "additional_info": ["Мед. осмотр"]
+    },
+    {
+      "employee_id": "3465434",
+      "date": "2025-04-14",
+      "start_time": "12:02:53",
+      "breaks": {"long": 1, "short": 2},
+      "logs": [{"count": 1, "description": "Норма"}],
+      "additional_info": ["Команда"]
     }
   ],
   "early_warning": [
