@@ -89,7 +89,7 @@ export const REAL_TIME_DATA = {
       "additional_info": ["Проф. прогноз"]
     },
     {
-      "employee_id": "01923245",
+      "employee_id": "363893",
       "date": "2025-04-14",
       "start_time": "12:02:53",
       "breaks": {"long": 0, "short": 3},
