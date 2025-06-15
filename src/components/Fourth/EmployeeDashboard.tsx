@@ -172,15 +172,15 @@ const EmployeeDashboard = () => {
         */
 
         // Восстановление позиции AI ассистента
-        const savedPosition = localStorage.getItem('ai-assistant-pos');
-        if (savedPosition) {
-            try {
-                const pos = JSON.parse(savedPosition);
-                setAiPosition({ left: pos.left, top: pos.top, bottom: 'auto' });
-            } catch (e) {
-                console.error('Ошибка восстановления позиции AI:', e);
-            }
-        }
+        // const savedPosition = localStorage.getItem('ai-assistant-pos');
+        // if (savedPosition) {
+        //     try {
+        //         const pos = JSON.parse(savedPosition);
+        //         setAiPosition({ left: pos.left, top: pos.top, bottom: 'auto' });
+        //     } catch (e) {
+        //         console.error('Ошибка восстановления позиции AI:', e);
+        //     }
+        // }
 
         // Анимации при загрузке
         initializeAnimations();
@@ -399,7 +399,7 @@ const EmployeeDashboard = () => {
 
                     <div className="main-content" style={{ gridTemplateColumns: '1.5fr 1fr 1.2fr', gridTemplateRows: '700px auto', minHeight: '0px', height: 'fit-content' }}>
                         {/* ЛЕВАЯ ПАНЕЛЬ */}
-                        <div className="left-panel" style={{ gridRow: '1', justifyContent: 'space-between', height:'100%' }}>
+                        <div className="left-panel" style={{ gridRow: '1', justifyContent: 'space-between', height: '100%' }}>
                             {/* GANTT ДИАГРАММА */}
                             <TasksGanttSection tasks={data?.tasks_timeline || []} onTaskClick={() => { }} />
 
@@ -411,7 +411,7 @@ const EmployeeDashboard = () => {
                         </div>
 
                         {/* ЦЕНТРАЛЬНАЯ ПАНЕЛЬ */}
-                        <div className="center-panel" style={{justifyContent: 'space-between', height:'100%'}}>
+                        <div className="center-panel" style={{ justifyContent: 'space-between', height: '100%' }}>
                             <h3>АНАЛИТИКА АКТИВНОСТИ</h3>
 
                             {/* МЕТРИКИ */}
@@ -435,20 +435,28 @@ const EmployeeDashboard = () => {
                         </div>
 
                         {/* НИЖНЯЯ СЕКЦИЯ */}
-                        <FactorsSection
-                            selectedFactor={selectedFactor}
-                            onFactorClick={handleFactorClick}
-                        />
+
+                        <div style={{ gridColumn: '2 / span 2' }}>
+                            <FactorsSection
+                                selectedFactor={selectedFactor}
+                                onFactorClick={handleFactorClick}
+                            />
+                        </div>
+
+                        <div style={{ gridColumn: '1', gridRow: '2', width: '100%', marginTop: '20px', marginLeft: '-20px', height: '171px' }}>
+                            {/* AI АССИСТЕНТ */}
+                            <AIAssistant
+                                ref={aiAssistantRef}
+                                position={aiPosition}
+                                onMouseDown={handleMouseDown}
+                            />
+                        </div>
+
                     </div>
 
 
 
-                    {/* AI АССИСТЕНТ */}
-                    <AIAssistant
-                        ref={aiAssistantRef}
-                        position={aiPosition}
-                        onMouseDown={handleMouseDown}
-                    />
+
                 </div>
 
                 {/* МОДАЛЬНОЕ ОКНО */}
