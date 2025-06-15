@@ -23,7 +23,7 @@ TODO ДЛЯ BACKEND ИНТЕГРАЦИИ:
 ==========================================
 */
 
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, useRef, createContext } from 'react';
 import './ManagerDashboard.css';
 import Modal from '../Fourth/Modal';
 import TasksGanttSection, { type GanttTask } from '../App/Gantt';
