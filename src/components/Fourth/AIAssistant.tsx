@@ -9,7 +9,8 @@ const AIAssistant = React.forwardRef(({ position, onMouseDown }: any, ref: React
         <div
             ref={ref}
             className="ai-assistant"
-            style={position}
+            // style={position}
+            style={{ position: 'relative', width: '100%', height: '100%', maxWidth: 'none' }}
             onMouseDown={onMouseDown}
         >
             <div className="avatar">AI</div>
